@@ -26,14 +26,13 @@ jobs:
           echo "::set-output name=version::${cmake_version}"
 
       # ------------------------------------------- Ubuntu 20.04 AppImage
-      - name: Prepare builder image for 20.04
-        run: |
-          docker build -t builder-image:2004 -f ./utils/appimage/Dockerfile.builder-2004 .
-
       - name: Build app image on 20.04
         run: |
-          docker run --privileged --name builder-2004 \
-            builder-image:2004 /rcssmonitor/utils/appimage/build_appimage.sh
+          
+          docker build -t builder-image:2004 -f ./utils/appimage/Dockerfile.builder-2004 .
+
+          docker run --privileged --name builder-2004 builder-image:2004 /rcssmonitor/utils/appimage/build_appimage.sh
+          
           docker cp builder-2004:/rcssmonitor/build/rcssmonitor-x86_64.AppImage \
             ${{ github.workspace }}/artifact/rcssmonitor-${{ steps.cmake_version.outputs.version }}-x86_64.AppImage
 
