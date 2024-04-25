@@ -31,7 +31,7 @@ jobs:
           
           docker build -t builder-image:2004 -f ./utils/appimage/Dockerfile.builder-2004 .
 
-          docker run --privileged --name builder-2004 builder-image:2004 /rcssmonitor/utils/appimage/build_appimage.sh
+          docker run --privileged --name builder-2004 builder-image:2004 /rcssmonitor/utils/appimage/docker-entrypoint.sh
           
           docker cp builder-2004:/rcssmonitor/build/rcssmonitor-x86_64.AppImage \
             ${{ github.workspace }}/artifact/rcssmonitor-${{ steps.cmake_version.outputs.version }}-x86_64.AppImage
