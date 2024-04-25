@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-WORKDIR="."
+WORKDIR="$(pwd)"
 
 BUILD_PWD="$WORKDIR/build"
 MONITOR_BIN_PATH="$BUILD_PWD/monitor-bin"

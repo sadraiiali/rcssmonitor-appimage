@@ -7,7 +7,7 @@ chmod +x linuxdeploy-x86_64.AppImage
 chmod +x linuxdeploy-plugin-qt-x86_64.AppImage
 
 
-SCRIPT_DIR="./build"
+SCRIPT_DIR="$(pwd)/build"
 M_BUILD_PWD="$SCRIPT_DIR/monitor-bin"
 BIN_PATH="$M_BUILD_PWD/bin/rcssmonitor"
 APP_IMAGE_DIR="$SCRIPT_DIR/appimage"
