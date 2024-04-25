@@ -20,7 +20,7 @@ mkdir -p $APP_IMAGE_DIR || true
 LIBZ_PATH=$(ldd $BIN_PATH | grep libz.so | awk '{ print $3 }')
 LIBRCSSRCG_PATH=$(ldd $BIN_PATH | grep librcssrcg.so | awk '{ print $3 }')
 
-
+cd $SCRIPT_DIR
 ./linuxdeploy-x86_64.AppImage --appdir $APP_IMAGE_DIR \
                 --plugin qt \
                 -l $LIBZ_PATH \
