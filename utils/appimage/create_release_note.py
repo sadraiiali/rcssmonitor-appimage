@@ -5,8 +5,7 @@ from urllib.request import urlopen
 import json
 
 
-github_token = os.environ.get("GITHUB_TOKEN")
-repo = "rcsoccersim/rcssmonitor"
+repo = os.environ.get("GITHUB_REPOSITORY")
 
 
 def create_release_note():
@@ -78,6 +77,9 @@ def main():
     print(f"Current version: {curr_version}")
     print(f"Action release: {last_release}")
     release = release_note_until_last_release(release_notes, last_release)
+    if release == "":
+        print("No new release")
+        return
     with open("release_note.md", "w") as f:
         f.write(release)
     
