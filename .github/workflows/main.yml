@@ -51,7 +51,11 @@ jobs:
         run: |
           curl -s -o /dev/null -w "%{http_code}" https://api.github.com/repos/${{ github.repository }}/releases/tags/${{ github.ref_name }} -u ${{ secrets.GITHUB_TOKEN }}:
           echo "::set-output name=release_exists::${{ steps.check_release.outputs.stdout }}"
+          echo "${{ steps.check_release.outputs.release_exists }}"
 
+      - name: debug release_exists
+        run: |
+          echo "${{ steps.check_release.outputs.release_exists }}""
       - name: Create release note
         if : ${{ steps.check_release.outputs.release_exists }} == "404"
         run: |
