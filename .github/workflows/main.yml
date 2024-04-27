@@ -52,9 +52,11 @@ jobs:
           curl -s -o /dev/null -w "%{http_code}" https://api.github.com/repos/${{ github.repository }}/releases/tags/${{ github.ref_name }} -u ${{ secrets.GITHUB_TOKEN }}:
           echo "::set-output name=release_exists::${{ steps.check_release.outputs.stdout }}"
 
-      - name: Debug
+      - name: Create release note
         run: |
-          echo ${{ steps.check_release.outputs.release_exists }}
+          export GITHUB_REPOSITORY=${{ github.repository }}
+          python utils/appimage/create_release_note.py
+          cp release_note.md ${{ github.workspace }}/artifact/release_note
           
 
       # ------------------------------------------- Release
@@ -64,5 +66,6 @@ jobs:
         with:
           artifacts: "${{ github.workspace }}/artifact/rcssmonitor-${{ steps.cmake_version.outputs.version }}-x86_64.AppImage"
           token: ${{ secrets.GITHUB_TOKEN }}
+          bodyFile: "${{ github.workspace }}/artifact/release_note"
           name: "${{ steps.cmake_version.outputs.version }}"
           tag: ${{ steps.cmake_version.outputs.version }}
