@@ -8,6 +8,10 @@ on:
       - "*"
 
 
+env:
+  release-prefix: "rcssmonitor-"
+
+
 jobs:
   app-image:
     runs-on: ubuntu-latest
@@ -69,5 +73,5 @@ jobs:
           artifacts: "${{ github.workspace }}/artifact/rcssmonitor-${{ steps.cmake_version.outputs.version }}-x86_64.AppImage"
           token: ${{ secrets.GITHUB_TOKEN }}
           bodyFile: "${{ github.workspace }}/artifact/release_note"
-          name: "${{ steps.cmake_version.outputs.version }}"
+          name: "${{ env.release-prefix }}${{ steps.cmake_version.outputs.version }}"
           tag: ${{ steps.cmake_version.outputs.version }}
