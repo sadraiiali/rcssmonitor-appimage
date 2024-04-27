@@ -6,6 +6,14 @@
 
   * Fix warnings that occur with Qt-5.15
 
+[19.0.1]
+  * Support new server parameters.
+
+  * Reimplement a rcg parser library. A faster JSON parser is now
+    avaiable.
+
+  * Fix warnings that occur with Qt-5.15
+
 [19.0.0]
   * Support new server parameters.
 
