@@ -57,7 +57,7 @@ def release_note_until_last_release(release_notes, last_release):
     out = ""  
     for key in release_notes:
         if compare_version(key, last_release) > 0:
-            out+= f"[{key}]"
+            out+= f"[{key}]\n"
             out += release_notes[key]
             out += "\n\n"
         elif compare_version(key, last_release) == 0:
@@ -79,10 +79,10 @@ def main():
     print(f"Current version: {curr_version}")
     print(f"Action release: {last_release}")
     release = release_note_until_last_release(release_notes, last_release)
-    if release == "":
-        print("No new release")
-        return
     with open("release_note.md", "w") as f:
+        if release == "":
+            f.write("TBD")
+            return
         f.write(release)
     
 if __name__ == "__main__":
