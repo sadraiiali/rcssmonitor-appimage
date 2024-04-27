@@ -58,8 +58,8 @@ def release_note_until_last_release(release_notes, last_release):
     out = ""  
     for key in release_notes:
         if compare_version(key, last_release) > 0:
-            out+= f"[{key}]")
-            out += release_notes[key])
+            out+= f"[{key}]"
+            out += release_notes[key]
             out += "\n\n"
         elif compare_version(key, last_release) == 0:
             break
