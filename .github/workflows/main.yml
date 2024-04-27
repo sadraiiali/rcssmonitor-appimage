@@ -52,9 +52,6 @@ jobs:
           out=$(curl -s -o /dev/null -w "%{http_code}" https://api.github.com/repos/${{ github.repository }}/releases/tags/${{ steps.cmake_version.outputs.version }})
           echo "::set-output name=release_exists::${out}"
 
-      - name: debug release_exists
-        run: |
-          echo "${{ steps.check_release.outputs.release_exists }}""
       - name: Create release note
         if : ${{ steps.check_release.outputs.release_exists }} == "404"
         run: |
